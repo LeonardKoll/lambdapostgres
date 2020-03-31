@@ -1,19 +1,24 @@
+
 {
-  "Information": [
-    "This file provides default values for the deployment wizard inside Visual Studio and the AWS Lambda commands added to the .NET Core CLI.",
-    "To learn more about the Lambda commands with the .NET Core CLI execute the following command at the command line in the project root directory.",
-
-    "dotnet lambda help",
-
-    "All the command line options for the Lambda command can be specified in this file."
-  ],
-
-  "profile":"",
-  "region" : "",
-  "configuration": "Release",
-  "framework": "netcoreapp2.0",
-  "function-runtime": "dotnetcore2.0",
-  "function-memory-size": 256,
-  "function-timeout": 30,
-  "function-handler": "lambdamail::lambdamail.Function::FunctionHandler"
+    "Information" : [
+        "This file provides default values for the deployment wizard inside Visual Studio and the AWS Lambda commands added to the .NET Core CLI.",
+        "To learn more about the Lambda commands with the .NET Core CLI execute the following command at the command line in the project root directory.",
+        "dotnet lambda help",
+        "All the command line options for the Lambda command can be specified in this file."
+    ],
+    "profile"     : "default",
+    "region"      : "eu-west-1",
+    "configuration" : "Release",
+    "framework"     : "netcoreapp2.1",
+    "function-runtime" : "dotnetcore2.1",
+    "function-memory-size" : 256,
+    "function-timeout"     : 30,
+    "function-handler"     : "lambdamail::lambdamail.Function::FunctionHandler",
+    "function-name"        : "sqsfollowup",
+    "function-role"        : "arn:aws:iam::928445776081:role/service-role/postgresWrite-role-ndc69es6",
+    "dead-letter-target-arn" : "arn:aws:sqs:eu-west-1:928445776081:tryoutSQS",
+    "tracing-mode"           : "PassThrough",
+    "environment-variables"  : "",
+    "function-subnets"       : "subnet-5b3f5901,subnet-0df4d16b,subnet-ec5d69a4",
+    "function-security-groups" : "sg-fb9e72b4"
 }

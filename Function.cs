@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Amazon.Lambda.Core;
 using Amazon.Lambda.SQSEvents;
 using lambdamail.ConsoleApp.PostgreSQL;
+using Newtonsoft.Json.Linq;
 
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
@@ -45,13 +46,13 @@ namespace lambdamail
         private async Task ProcessMessageAsync(SQSEvent.SQSMessage message, ILambdaContext context)
         {
             context.Logger.LogLine($"Processed message {message.Body}");
-
+            var msg = JObject.Parse(message.Body);
             DataTable dt = new DataTable();
-            double v = Convert.ToDouble(dt.Compute(message.Body, ""));
+            double v = Convert.ToDouble(dt.Compute(msg["Message"].ToString(), ""));
 
             using (var c = new TryoutContext())
             {
-                c.Calcs.Add(new Calcs { term = message.Body, result = v });
+                c.Calcs.Add(new Calcs { term = msg["Message"].ToString(), result = v });
                 await c.SaveChangesAsync();
             }
 
